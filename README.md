@@ -1,6 +1,6 @@
 # ica-homeworks
 o Hw foi distribuído da seguinte forma entre os membros:
-1. Kaua : análise predatória e análise univariada
+1. Kaua : análise preditiva e análise univariada
 2. Gabriel: análise bivariada n condicional
 3. Cecília: análise multivariada
 
