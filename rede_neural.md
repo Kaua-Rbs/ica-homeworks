@@ -26,7 +26,7 @@ Predição (ŷ: n×1)
 ```
 
 **Onde:**
-- **D** = número de features (variáveis preditoras) = 19 features após pré-processamento
+- **D** = número de features (variáveis preditoras) = 35 features após pré-processamento
 - **n** = número de exemplos de treinamento
 - **Camada Oculta**: 128 neurônios com ativação **Sigmoide** para capturar não-linearidades
 - **Camada de Saída**: 1 neurônio com ativação **Linear** (apropriado para regressão)
@@ -34,13 +34,13 @@ Predição (ŷ: n×1)
 ### Dimensões dos Pesos
 
 ```
-W1 (entrada → oculta):  (19, 128)
+W1 (entrada → oculta):  (35, 128)
 b1 (bias oculta):       (1, 128)
 
 W2 (oculta → saída):    (128, 1)
 b2 (bias saída):        (1, 1)
 
-Total de parâmetros: 19×128 + 128 + 128×1 + 1 = 2,561 parâmetros
+Total de parâmetros: 35×128 + 128 + 128×1 + 1 = 4,737 parâmetros
 ```
 
 ---
@@ -184,15 +184,6 @@ $$R^2 = 1 - \frac{\sum(y_i - \hat{y}_i)^2}{\sum(y_i - \bar{y})^2}$$
 - $R^2 = 0$: Modelo não melhor que predizer a média
 - $R^2 < 0$: Modelo pior que a baseline
 
-**Classificação de Performance:**
-| Faixa | Qualidade |
-|-------|-----------|
-| R² > 0.9 | Excelente |
-| 0.8 < R² ≤ 0.9 | Muito Bom |
-| 0.7 < R² ≤ 0.8 | Bom |
-| 0.5 < R² ≤ 0.7 | Aceitável |
-| R² ≤ 0.5 | Fraco |
-
 #### 2. **RMSE (Root Mean Squared Error)**
 
 $$\text{RMSE} = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2}$$
@@ -282,9 +273,9 @@ model.save_model('modelos_treinados/modelo_hr_prediction.npz')
 
 **Conteúdo Preservado:**
 ```
-W1:           Pesos camada 1 (19, 64)
-b1:           Biases camada 1 (1, 64)
-W2:           Pesos camada 2 (64, 1)
+W1:           Pesos camada 1 (35, 128)
+b1:           Biases camada 1 (1, 128)
+W2:           Pesos camada 2 (128, 1)
 b2:           Biases camada 2 (1, 1)
 weight_decay: Hiperparâmetro de regularização
 ```
@@ -299,7 +290,7 @@ modelo_carregado = NeuralNetworkRegression.load_model(
 
 **Processo:**
 1. Lê arquivo NPZ
-2. Extrai dimensões de W1 e W2 → reconstrói arquitetura (19 → 128 → 1)
+2. Extrai dimensões de W1 e W2 → reconstrói arquitetura (35 → 128 → 1)
 3. Carrega todos os pesos treinados
 4. Retorna instância pronta para predição
 
@@ -335,7 +326,7 @@ predicoes = modelo.forward(X_novo)
 info = modelo.get_model_info()
 print(f"Arquitetura: {info['input_size']} → {info['hidden_size']} → {info['output_size']}")
 print(f"Total de parâmetros: {info['total_params']}")
-# Saída esperada: 19 → 128 → 1 (2561 parâmetros)
+# Saída esperada: 35 → 128 → 1 (4737 parâmetros)
 ```
 
 ---
